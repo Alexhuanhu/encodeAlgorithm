@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http:/mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="algorithm">
+	
+	<sql id="tableName">ALGORITHM</sql>
+	
+	<!-- 查询所有的算法 -->
+	<select id="findAlgorithm" parameterType="com.model.Algorithm" resultType="com.model.Algorithm">
+		select 
+		ALG 		as 			alg,
+		RULT		as			rult
+		from ALGORITHM
+	</select>
+	
+	<!-- 根据算法名称，模糊查询算法 -->
+	<select id="findAlgorithmByName" parameterType="com.model.Algorithm" resultType="com.model.Algorithm">
+		select 
+		ALG			as 			alg,
+		RULT		as			rult
+		from ALGORITHM
+		where 1=1
+		<if test="alg != null and alg != '' ">
+			and ALG like concat(concat('%',#{alg}),'%')
+		</if>
+	</select>
+	
+</mapper>
